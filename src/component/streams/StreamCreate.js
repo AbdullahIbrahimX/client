@@ -29,7 +29,6 @@ class StreamCreate extends React.Component{
 
     onSubmit = (formValues) =>{
         // formValues.preventDefault() you don't need this
-        console.log(formValues)
         this.props.createStream(formValues)
     }
 

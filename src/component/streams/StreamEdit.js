@@ -1,11 +1,18 @@
 import React from 'react';
+import {connect} from "react-redux";
+import {fetchStream} from "../../actions";
 
-const StreamEdit = () => {
+const StreamEdit = (props) => {
+    console.log(props)
     return (
         <div>
-            StreamEdit
+            fs
         </div>
     );
 };
 
-export default StreamEdit;
+const mapStateToProps = (state) =>{
+
+}
+
+export default connect(mapStateToProps,{fetchStream})(StreamEdit);
