@@ -11,8 +11,13 @@ const StreamEdit = (props) => {
     );
 };
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state,ownProps) =>{
+    console.log(state);
+    console.log(ownProps)
+    return{
+        currentStream:state.fetchStream(state.match.params.id)
 
+    }
 }
 
 export default connect(mapStateToProps,{fetchStream})(StreamEdit);
