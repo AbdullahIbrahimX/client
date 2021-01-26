@@ -32,6 +32,7 @@ class StreamCreate extends React.Component{
         console.log(formValues)
         this.props.createStream(formValues)
     }
+
     // renderedInput(formInput){
     //     console.log(formInput)
     //     return(
@@ -60,10 +61,10 @@ class StreamCreate extends React.Component{
 
 const validate = (formValues)=>{
     const errors = {};
-    if (!formValues.title){
+    if (!formValues.title ){
         errors.title = "please enter a value for title"
     }
-    if (!formValues.description){
+    if (!formValues.description || formValues.description.length<25){
         errors.description = "It's ok to put no value here but I'm following instructions :)"
     }
     return errors;
