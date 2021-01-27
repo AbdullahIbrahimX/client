@@ -17,7 +17,7 @@ const streamReducer = (state={},action) =>{
             // newState[action.payload.id] = action.payload
             // return newState
             //** much better ahhh
-            return {...state,[action.payload.id]:action.payload}
+            return {...state}
         case DELETE_STREAM:
             return _.omit(state,action.payload)
         case FETCH_STREAMS:
