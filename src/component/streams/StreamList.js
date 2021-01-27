@@ -57,6 +57,7 @@ class StreamList extends React.Component{
             <div className={" ui celled list"}>
                 {this.renderList()}
                 {/*{this.props.isSignedIn ? <Link><button>Create A Stream</button></Link>:null}*/}
+                <hr/>
                 {this.renderCreateButton()}
             </div>
         )

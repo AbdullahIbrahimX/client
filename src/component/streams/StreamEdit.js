@@ -1,84 +1,46 @@
 import React  from 'react';
 import {connect} from "react-redux";
 import {editStream, fetchStream} from "../../actions";
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
+import StreamForm from "./StreamForm";
 
 class StreamEdit extends React.Component{
     componentDidMount() {
         this.props.fetchStream(this.props.match.params.id)
     }
 
-    renderError ({error,touched}){
-        if (error && touched){
-            return(
-                <div className={"ui error message"}>
-                    <div className={"header"}>
-                        {error}
+    onSubmit = ({title,description}) =>{
+        this.props.editStream(this.props.match.params.id,{title,description})
+    }
+
+    render() {
+        if (!this.props.stream){
+            return (
+                <div className={"ui active inverted dimmer"}>
+                    <div className={"ui text loader"}>
+                        Loading ...
                     </div>
                 </div>
             )
         }
-    }
 
-    renderedInput = ({input,label,meta}) =>{
-        if(this.props.streams) {
-            console.log(input)
-            const className = `field ${meta.error && meta.touched ? "error":""}`;
-            return(
-                <div className={className}>
-                    <label>{label}</label>
-                    <input {...input} autoComplete={"off"}/>
-                    {this.renderError(meta)}
-                </div>
-            )
-        }else{
-           return null
-        }
-    }
-
-    onSubmit = (formValues) =>{
-        this.props.editStream(this.props.match.params.id,formValues)
-    }
-
-    render() {
         return (
-            <form className={"ui form error"} onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <Field
-                    name={"title"}
-                    component={this.renderedInput}
-                    label={"Title"}
-                />
-                <Field
-                    name={"description"}
-                    component={this.renderedInput}
-                    label={"Description"}
-                />
-                <button className={"ui button secondary"}>Submit</button>
-            </form>
+            <div>
+                <StreamForm onSubmit={this.onSubmit} initialValues={this.props.stream}/>
+            </div>
         );
     }
 
 
 };
-const validate = (formValues)=>{
-    const errors = {};
-    if (!formValues.title ){
-        errors.title = "please enter a value for title"
-    }
-    if (!formValues.description || formValues.description.length<25){
-        errors.description = "It's ok to put no value here but I'm following instructions :)"
-    }
-    return errors;
-}
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state,ownProps) =>{
     return{
-        streams:Object.values(state.streams)
+        stream: state.streams[ownProps.match.params.id]
     }
 }
 
 const wrappedForm= reduxForm({
-    form:"editStream",
-    validate:validate
+    form:"editStream"
 })(StreamEdit)
 export default connect(mapStateToProps,{fetchStream,editStream})(wrappedForm);
