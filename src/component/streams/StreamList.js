@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {fetchStreams} from "../../actions";
 import {Link} from "react-router-dom";
+import LoadingScreen from "./LoadingScreen";
 
 
 class StreamList extends React.Component{
@@ -53,6 +54,11 @@ class StreamList extends React.Component{
         })
     }
     render() {
+        if (this.props.streams.length === 0){
+            return (
+                <LoadingScreen title={"Loading Streams ..."}/>
+            )
+        }
         return(
             <div className={" ui celled list"}>
                 {this.renderList()}

@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {editStream, fetchStream} from "../../actions";
 import {reduxForm} from "redux-form";
 import StreamForm from "./StreamForm";
+import LoadingScreen from "./LoadingScreen";
 
 class StreamEdit extends React.Component{
     componentDidMount() {
@@ -16,11 +17,7 @@ class StreamEdit extends React.Component{
     render() {
         if (!this.props.stream){
             return (
-                <div className={"ui active inverted dimmer"}>
-                    <div className={"ui text loader"}>
-                        Loading ...
-                    </div>
-                </div>
+                <LoadingScreen title={"Loading ..."}/>
             )
         }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Field,reduxForm} from "redux-form";
 
 class StreamForm extends React.Component{
+
     renderError ({error,touched}){
         if (error && touched){
             return(
@@ -13,6 +14,7 @@ class StreamForm extends React.Component{
             )
         }
     }
+
     renderedInput = ({input,label,meta}) =>{
         const className = `field ${meta.error && meta.touched ? "error":""}`;
         return(
@@ -57,8 +59,6 @@ const validate = (formValues)=>{
     }
     return errors;
 }
-
-
 
 export default reduxForm({
     form:"streamCreate",
