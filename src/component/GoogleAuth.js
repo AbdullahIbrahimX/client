@@ -6,31 +6,31 @@ import {signIn,signOut} from "../actions";
 class GoogleAuth extends React.Component {
 
     componentDidMount() {
-        //googleAut old version
-        // window.gapi.load("client:auth2",()=>{
-        //     window.gapi.client.init({
-        //         clientId:"736858813759-bpps7h41s5on24a9rmmflitm10lgm3j6.apps.googleusercontent.com",
-        //         scope:"email"
-        //     }).then(()=>{
-        //         this.auth = window.gapi.auth2.getAuthInstance();
-        //         this.onAuthChange(this.auth.isSignedIn.get())
-        //         this.auth.isSignedIn.listen(this.onAuthChange)
-        //     });
-        // })
-
-        //google Auth2 new Version
-        window.gapi.load("auth2",()=>{
-            window.gapi.auth2.init({
+        // googleAut old version
+        window.gapi.load("client:auth2",()=>{
+            window.gapi.client.init({
                 clientId:"736858813759-bpps7h41s5on24a9rmmflitm10lgm3j6.apps.googleusercontent.com",
                 scope:"email"
-            }).then((GoogleAuth2)=>{
-                if(GoogleAuth2){
-                    this.auth = GoogleAuth2;
-                    this.onAuthChange(this.auth.currentUser.get().isSignedIn())
-                    this.auth.isSignedIn.listen(this.onAuthChange)
-                }
+            }).then(()=>{
+                this.auth = window.gapi.auth2.getAuthInstance();
+                this.onAuthChange(this.auth.isSignedIn.get())
+                this.auth.isSignedIn.listen(this.onAuthChange)
             });
         })
+
+        //google Auth2 new Version
+        // window.gapi.load("auth2",()=>{
+        //     window.gapi.auth2.init({
+        //         clientId:"736858813759-bpps7h41s5on24a9rmmflitm10lgm3j6.apps.googleusercontent.com",
+        //         scope:"email"
+        //     }).then((GoogleAuth2)=>{
+        //         if(GoogleAuth2){
+        //             this.auth = GoogleAuth2;
+        //             this.onAuthChange(this.auth.currentUser.get().isSignedIn())
+        //             this.auth.isSignedIn.listen(this.onAuthChange)
+        //         }
+        //     });
+        // })
     }
 
     onAuthChange = (isSignedIn) => {
